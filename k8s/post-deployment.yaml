@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: post-service
-        image: skillswap-post-service:latest
-        imagePullPolicy: Never
+        image: akanksha1402/skillswap-post-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:

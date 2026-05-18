@@ -1,0 +1,17 @@
+# .NET
+**/bin/
+**/obj/
+**/.vs/
+
+# Docker
+**/.dockerignore
+
+# Environment files
+**/appsettings.Development.json
+
+# Kubernetes secrets
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db

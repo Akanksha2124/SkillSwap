@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: skillswap-auth-service:latest
-        imagePullPolicy: Never
+        image: akanksha1402/skillswap-auth-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
