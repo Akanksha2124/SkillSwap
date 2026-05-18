@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+
+  auth-db:
+    image: postgres:16
+    container_name: auth-db
+    environment:
+      POSTGRES_DB: skillswap_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+
+  user-db:
+    image: postgres:16
+    container_name: user-db
+    environment:
+      POSTGRES_DB: skillswap_users
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5434:5432"
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+
+  post-db:
+    image: postgres:16
+    container_name: post-db
+    environment:
+      POSTGRES_DB: skillswap_posts
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5435:5432"
+    volumes:
+      - post-db-data:/var/lib/postgresql/data
+
+  auth-service:
+    build:
+      context: ./AuthService/AuthService
+    container_name: auth-service
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=auth-db;Database=skillswap_auth;Username=postgres;Password=postgres123
+      - Jwt__Key=ThisIsASecretKeyForSkillSwapAndItNeedsToBeLongEnough
+      - Jwt__Issuer=SkillSwap
+      - Jwt__Audience=SkillSwapUsers
+    ports:
+      - "5277:8080"
+    depends_on:
+      - auth-db
+
+  user-service:
+    build:
+      context: ./UserService/UserService
+    container_name: user-service
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=user-db;Database=skillswap_users;Username=postgres;Password=postgres123
+    ports:
+      - "5231:8080"
+    depends_on:
+      - user-db
+
+  post-service:
+    build:
+      context: ./PostService/PostService
+    container_name: post-service
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=post-db;Database=skillswap_posts;Username=postgres;Password=postgres123
+    ports:
+      - "5021:8080"
+    depends_on:
+      - post-db
+
+volumes:
+  auth-db-data:
+  user-db-data:
+  post-db-data:
