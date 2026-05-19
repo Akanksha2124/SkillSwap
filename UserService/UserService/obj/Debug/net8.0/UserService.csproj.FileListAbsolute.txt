@@ -111,3 +111,4 @@ C:\Users\Akanksha Singh\OneDrive\Desktop\SkillSwap\UserService\UserService\obj\D
 C:\Users\Akanksha Singh\OneDrive\Desktop\SkillSwap\UserService\UserService\obj\Debug\net8.0\UserService.pdb
 C:\Users\Akanksha Singh\OneDrive\Desktop\SkillSwap\UserService\UserService\obj\Debug\net8.0\UserService.genruntimeconfig.cache
 C:\Users\Akanksha Singh\OneDrive\Desktop\SkillSwap\UserService\UserService\obj\Debug\net8.0\ref\UserService.dll
+C:\Users\Akanksha Singh\OneDrive\Desktop\SkillSwap\UserService\UserService\obj\Debug\net8.0\UserService.sourcelink.json
